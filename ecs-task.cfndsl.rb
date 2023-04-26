@@ -328,6 +328,8 @@ CloudFormation do
         end
 
         EphemeralStorage external_parameters[:ephemeral_storage] unless external_parameters[:ephemeral_storage].nil?
+          
+        RuntimePlatform external_parameters[:runtime_platform] unless external_parameters[:runtime_platform].nil?
 
         Tags task_tags
 
