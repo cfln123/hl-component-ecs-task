@@ -35,10 +35,12 @@ CloudFormation do
       image_tag = task.has_key?('tag') ? "#{task['tag']}" : 'latest'
       image_tag = task.has_key?('tag_param') ? Ref("#{task['tag_param']}") : image_tag
 
+      image_repo << "/" unless image_repo.empty?
+        
       # create main definition
       task_def =  {
         Name: name,
-        Image: FnJoin('', [FnSub("#{image_repo}/#{image_name}"), ":", image_tag]),
+        Image: FnJoin('', [FnSub("#{image_repo}#{image_name}"), ":", image_tag]),
         LogConfiguration: {
           LogDriver: 'awslogs',
           Options: {
